@@ -1,3 +1,4 @@
-# Workflows Course
+# Workflows - Seed project
 
-This project is an example of workflow management for a lynda.com course.
+This project is a seed project for larger projects
+It includes automation for development and production of large web applications
