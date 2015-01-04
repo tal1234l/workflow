@@ -10,7 +10,8 @@ var gulp = require('gulp'),
     jsonminify = require('gulp-jsonminify'),
     imagemin = require('gulp-imagemin'),
     pngcrush = require('imagemin-pngcrush'),
-    concat = require('gulp-concat');
+    concat = require('gulp-concat'),
+    open = require('gulp-open');
 
 var env,
     coffeeSources,
@@ -84,8 +85,7 @@ gulp.task('connect', function() {
   connect.server({
 	port: 9000,
     root: outputDir,
-    livereload: true,
-    open: true
+    livereload: true
   });
 });
 
@@ -114,4 +114,9 @@ gulp.task('json', function() {
     .pipe(connect.reload())
 });
 
-gulp.task('default', ['html', 'json', 'coffee', 'js', 'compass', 'images', 'connect', 'watch']);
+gulp.task('open', function(){
+    gulp.src('builds/development/*.html')
+        .pipe(open('', {app: 'chrome', url: 'http://localhost:9000'}));
+});
+
+gulp.task('default', ['html', 'json', 'coffee', 'js', 'compass', 'images', 'connect', 'watch','open']);
