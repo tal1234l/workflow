@@ -4,6 +4,7 @@ var gulp = require('gulp'),
     browserify = require('gulp-browserify'),
     compass = require('gulp-compass'),
     connect = require('gulp-connect'),
+    jshint = require('gulp-jshint'),
     gulpif = require('gulp-if'),
     uglify = require('gulp-uglify'),
     minifyHTML = require('gulp-minify-html'),
@@ -24,7 +25,7 @@ var env,
 
 env = process.env.NODE_ENV || 'development';
 
-if (env==='development') {
+if (env === 'development') {
   outputDir = 'builds/development/';
   sassStyle = 'expanded';
 } else {
@@ -119,4 +120,12 @@ gulp.task('open', function(){
         .pipe(open('', {app: 'chrome', url: 'http://localhost:9000'}));
 });
 
-gulp.task('default', ['html', 'json', 'coffee', 'js', 'compass', 'images', 'connect', 'watch','open']);
+// JSHint task
+gulp.task('lint', function() {
+    return gulp.src(gulp.dest(outputDir)+'/js/*.js')
+        .pipe(jshint())
+        // You can look into pretty reporters as well
+        .pipe(jshint.reporter('default'));
+});
+
+gulp.task('default', ['html', 'json', 'coffee', 'js', 'compass', 'images', 'connect', 'watch', 'lint', 'open']);
