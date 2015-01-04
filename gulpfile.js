@@ -82,7 +82,7 @@ gulp.task('watch', function() {
 
 gulp.task('connect', function() {
   connect.server({
-    port: 9000,
+	port: 9000,
     root: outputDir,
     livereload: true
   });
@@ -113,4 +113,4 @@ gulp.task('json', function() {
     .pipe(connect.reload())
 });
 
-gulp.task('default', ['html', 'json', 'coffee', 'js', 'compass', 'images', 'watch',  'connect']);
+gulp.task('default', ['html', 'json', 'coffee', 'js', 'compass', 'images', 'connect', 'watch']);
