@@ -10,7 +10,8 @@ var gulp = require('gulp'),
     minifyHTML = require('gulp-minify-html'),
     jsonminify = require('gulp-jsonminify'),
     imagemin = require('gulp-imagemin'),
-    pngcrush = require('imagemin-pngcrush'),
+    pngquant = require('imagemin-pngquant'),
+    sprite = require('gulp-sprite-generator'),
     concat = require('gulp-concat'),
     open = require('gulp-open');
 
@@ -102,10 +103,24 @@ gulp.task('images', function() {
     .pipe(gulpif(env === 'production', imagemin({
       progressive: true,
       svgoPlugins: [{ removeViewBox: false }],
-      use: [pngcrush()]
+      use: [pngquant()]
     })))
     .pipe(gulpif(env === 'production', gulp.dest(outputDir + 'images')))
     .pipe(connect.reload())
+});
+
+gulp.task('sprites', function() {
+    var spriteOutput;
+
+    spriteOutput = gulp.src('builds/development/css/*.css')
+        .pipe(sprite({
+            baseUrl:         "builds/development/images/**/*.*",
+            spriteSheetName: "sprite.png",
+            spriteSheetPath: gulp.dest(outputDir + 'images')
+        }));
+
+    spriteOutput.css.pipe(gulp.dest(outputDir + 'css'));
+    spriteOutput.img.pipe(gulp.dest(outputDir + 'images'));
 });
 
 gulp.task('json', function() {
@@ -128,4 +143,4 @@ gulp.task('lint', function() {
         .pipe(jshint.reporter('default'));
 });
 
-gulp.task('default', ['html', 'json', 'coffee', 'js', 'compass', 'images', 'connect', 'watch', 'lint', 'open']);
+gulp.task('default', ['html', 'json', 'coffee', 'js', 'compass', 'images','sprites', 'connect', 'watch', 'lint', 'open']);
