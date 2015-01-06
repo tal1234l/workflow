@@ -62,8 +62,8 @@ module.exports = function(flights) {
 
     //app.get('/', routes.herokuapp_production);
     //app.get('/', routes.herokuapp_testing);
-    app.get('/', routes.herokuapp_localhost);
-    //app.get('/', routes.herokuapp_nitrous);
+    //app.get('/', routes.herokuapp_localhost);
+    app.get('/', routes.herokuapp_nitrous);
 
 
     /*app.get('/isRegistered/:PID/:DID',routes.isRegistered);
