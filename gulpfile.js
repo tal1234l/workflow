@@ -1,6 +1,5 @@
 var gulp = require('gulp'),
     gutil = require('gulp-util'),
-    coffee = require('gulp-coffee'),
     browserify = require('gulp-browserify'),
     compass = require('gulp-compass'),
     connect = require('gulp-connect'),
@@ -16,7 +15,6 @@ var gulp = require('gulp'),
     open = require('gulp-open');
 
 var env,
-    coffeeSources,
     jsSources,
     sassSources,
     htmlSources,
@@ -34,24 +32,23 @@ if (env === 'development') {
   sassStyle = 'compressed';
 }
 
-
-coffeeSources = ['components/coffee/tagline.coffee'];
 jsSources = [
-  'components/scripts/rclick.js',
-  'components/scripts/pixgrid.js',
-  'components/scripts/tagline.js',
-  'components/scripts/template.js'
+  'components/lib/angular/angular.min.js',
+  'components/lib/angular/angular-animate.min.js',
+  'components/lib/angular/angular-route.min.js'
 ];
+
+jsonSources = [
+    'builds/development/js/*.json',
+    'components/lib/angular/angular.min.js.map',
+    'components/lib/angular/angular-animate.min.js.map',
+    'components/lib/angular/angular-route.min.js.map'
+];
+
 sassSources = ['components/sass/style.scss'];
 htmlSources = [outputDir + '*.html'];
 jsonSources = [outputDir + 'js/*.json'];
 
-gulp.task('coffee', function() {
-  gulp.src(coffeeSources)
-    .pipe(coffee({ bare: true })
-    .on('error', gutil.log))
-    .pipe(gulp.dest('components/scripts'))
-});
 
 gulp.task('js', function() {
   gulp.src(jsSources)
@@ -75,7 +72,6 @@ gulp.task('compass', function() {
 });
 
 gulp.task('watch', function() {
-  gulp.watch(coffeeSources, ['coffee']);
   gulp.watch(jsSources, ['js']);
   gulp.watch('components/sass/*.scss', ['compass']);
   gulp.watch('builds/development/*.html', ['html']);
@@ -124,7 +120,7 @@ gulp.task('sprites', function() {
 });
 
 gulp.task('json', function() {
-  gulp.src('builds/development/js/*.json')
+  gulp.src(jsonSources)
     .pipe(gulpif(env === 'production', jsonminify()))
     .pipe(gulpif(env === 'production', gulp.dest('builds/production/js')))
     .pipe(connect.reload())
@@ -143,4 +139,4 @@ gulp.task('lint', function() {
         .pipe(jshint.reporter('default'));
 });
 
-gulp.task('default', ['html', 'json', 'coffee', 'js', 'compass', 'images','sprites', 'connect', 'watch', 'lint', 'open']);
+gulp.task('default', ['html', 'json', 'js', 'compass', 'images','sprites', 'connect', 'watch', 'lint', 'open']);
