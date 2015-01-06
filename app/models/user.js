@@ -8,7 +8,7 @@ var userSchema = mongoose.Schema({
 
     local            : {
         email        : String,
-        user_name    : String,
+        username    : String,
         password     : String,
         user_uuid    : String,
         connectionKey : String 

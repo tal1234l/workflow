@@ -36,36 +36,32 @@ module.exports = function(passport) {
 
     passport.use('local-signup', new LocalStrategy({
         // by default, local strategy uses username and password, we will override with email
-        usernameField : 'email',
+        username : 'username',
         passwordField : 'password',
-        username : 'user_name',
         user_uuid : 'user_uuid',
         passReqToCallback : true // allows us to pass back the entire request to the callback
     },
-    function(req, email, password,user_name, done) {
+    function(req, username, password, done) {
 		// find a user whose email is the same as the forms email
 		// we are checking to see if the user trying to login already exists
-        User.findOne({ 'local.email' :  email }, function(err, user) {
+        User.findOne({ 'local.username' :  username }, function(err, user) {
             // if there are any errors, return the error
             if (err)
                 return done(err);
 
             // check to see if theres already a user with that email
             if (user) {
-                return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+                return done(null, false, req.flash('signupMessage', 'That user name is already taken.'));
             } else {
-
 				// if there is no user with that email
                 // create the user
-                var newUser            = new User();
+                var newUser  = new User();
                 var uniqueId = UUID();
+                debugger;
                 // set the user's local credentials
-                newUser.local.email    = email;
                 newUser.local.password = newUser.generateHash(password); // use the generateHash function in our user model
-                newUser.local.user_name = user_name;
+                newUser.local.username = username;
                 newUser.local.user_uuid = uniqueId;
-                newUser.local.connectionKey = "";
-
 
 				// save the user
                 newUser.save(function(err) {
@@ -74,7 +70,6 @@ module.exports = function(passport) {
                     return done(null, newUser);
                 });
 
-                send_email_message(email,user_name,uniqueId);
             }
 
         });
@@ -89,19 +84,20 @@ module.exports = function(passport) {
 
     passport.use('local-login', new LocalStrategy({
         // by default, local strategy uses username and password, we will override with email
-        usernameField : 'email',
+        usernameField : 'username',
         passwordField : 'password',
         passReqToCallback : true // allows us to pass back the entire request to the callback
     },
-    function(req, email, password, user_name, done) { // callback with email and password from our form
+    function(req, username, password, done) { // callback with email and password from our form
         // find a user whose email is the same as the forms email
         // we are checking to see if the user trying to login already exists
-        User.findOne({ 'local.email' :  email }, function(err, user) {
+        User.findOne({ 'local.username' :  username }, function(err, user) {
             // if there are any errors, return the error before anything else
             if (err)
                 return done(err);
 
             // if no user is found, return the message
+            debugger;
             if (!user)
                 return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
 
@@ -116,7 +112,7 @@ module.exports = function(passport) {
 
 };
 var UUID = function(){
-    var temp ='xxxxxxxx'.replace(/[xy]/g, function(c) {
+    var temp ='xxxxxxxxx'.replace(/[xy]/g, function(c) {
         var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
         return v.toString(16);
     });
@@ -133,13 +129,12 @@ var send_email_message = function(email, name ,uniqueId) {
             pass: "alaskahumi"
         }
     });
-    var ResigtrationMessage = "<u>Welcome to STA - Medical Communications </u><br><br> your personal information:<br>" +
-        "Name: "+name+"<br> Email:"+email+"<br> Unique id: "+uniqueId+"<br><br>Use your uniqueId to connect with your patients";
+    var ResigtrationMessage = '<u>Welcome to new identity.com </u>';
     // setup e-mail data with unicode symbols
     var mailOptions = {
         from: "sta.medical.communications@gmail.com", // sender address
         to: email,  // list of receivers
-        subject: "Registration to STA", // Subject line
+        subject: "you have successfully registered to new identity.com", // Subject line
         text: "Registration ", // plaintext body
         html: '<b>' +ResigtrationMessage+'</b>' // html body
     }
