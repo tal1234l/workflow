@@ -27,9 +27,9 @@ module.exports = function (flights) {
     }
 
     //local testing2
-    /*functions.herokuapp_nitrous = function(req, res){
-        res.redirect('http://homeconnect-123609.euw1-2.nitrousbox.com/login/light-index.html');
-    }*/
+    functions.herokuapp_nitrous = function(req, res){
+      res.redirect('http://testing-181398.euw1-2.nitrousbox.com:3000/development/index.html');
+    }
 
 
     functions.downloadForm = function(req, res){
