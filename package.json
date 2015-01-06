@@ -1,0 +1,63 @@
+{
+  "name": "workflows",
+  "version": "0.0.1",
+  "description": "A seed project workflow",
+  "author": "Tal Waserman",
+  "main": "server.js",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tal1234l/workflow.git"
+  },
+  "devDependencies": {
+    "gulp": "^3.6.2",
+    "gulp-browserify": "^0.5.0",
+    "gulp-coffee": "^1.4.3",
+    "gulp-compass": "^1.1.9",
+    "gulp-concat": "^2.2.0",
+    "gulp-connect": "^2.0.5",
+    "gulp-if": "^1.1.0",
+    "gulp-imagemin": "^2.1.0",
+    "gulp-jshint": "^1.9.0",
+    "gulp-jsonminify": "0.0.1",
+    "gulp-minify-html": "^0.1.3",
+    "gulp-open": "^0.3.1",
+    "gulp-sprite-generator": "^0.2.3",
+    "gulp-uglify": "^0.3.0",
+    "gulp-util": "^2.2.14",
+    "imagemin-pngquant": "^4.0.0",
+    "jquery": "^2.1.1",
+    "mocha": "^2.1.0",
+    "mustache": "^0.8.1",
+    "should": "^4.4.2",
+    "supertest": "^0.15.0"
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.10.1",
+    "connect": "^3.3.3",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.3.3",
+    "debug": "^2.1.1",
+    "ejs": "^2.0.7",
+    "errorhandler": "^1.3.2",
+    "express": "^4.10.7",
+    "express-session": "^1.10.0",
+    "formidable": "^1.0.16",
+    "html": "0.0.7",
+    "method-override": "^2.3.1",
+    "mongoose": "^3.8.21",
+    "morgan": "^1.5.1",
+    "nodemailer": "^1.3.0",
+    "passport": "^0.2.1",
+    "passport-local": "^1.0.0",
+    "socket.io": "^1.2.1",
+    "webrtc": "^1.12.0"
+  },
+  "engines": {
+    "node": "0.10.x"
+  }
+}
