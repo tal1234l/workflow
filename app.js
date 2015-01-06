@@ -1,12 +1,12 @@
 
 
-module.exports = function(flights) {
+module.exports = function() {
     var express = require('express');
     var cookieParser = require('cookie-parser');
     var bodyParser = require('body-parser');
     var methodOverride = require('method-override');
     var errorhandler = require('errorhandler');
-    var routes = require('./routes')(flights);
+    var routes = require('./routes')();
     var path = require('path');
     var nodemailer = require("nodemailer");
     var app = express();
