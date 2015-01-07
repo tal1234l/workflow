@@ -16,8 +16,8 @@ module.exports = function() {
     var session      = require('express-session');
 
     var myEnv       = evironment();
-    debugger;
-    require('./config/passport')(passport); // pass passport for configuration
+
+    require('./app_authentication_config/passport')(passport); // pass passport for configuration
 
     // all environments
     app.set('port', process.env.PORT || 3000);
@@ -45,9 +45,9 @@ module.exports = function() {
         res.set('X-Powered-By', 'new identity');
         next();
     });
-    debugger;
+
     app.use(express.static(path.join(__dirname, 'builds/'+process.env.NODE_ENV)));
-    require('./app/routes.js')(app, passport);
+    require('./app_authentication/routes.js')(app, passport);
 
     if (myEnv.local === 'development') {app.use(errorhandler()) }
 

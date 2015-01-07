@@ -5,7 +5,7 @@ var LocalStrategy   = require('passport-local').Strategy;
 var nodemailer = require("nodemailer");
 
 // load up the user model
-var User       		= require('../app/models/user');
+var User       		= require('../app_authentication/models/user');
 
 // expose this function to our app using module.exports
 module.exports = function(passport) {

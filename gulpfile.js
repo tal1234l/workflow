@@ -46,7 +46,7 @@ jsonSources = [
 ];
 
 sassSources = ['components/sass/style.scss'];
-htmlSources = [outputDir + '*.html'];
+htmlSources = [outputDir + '*.html', outputDir +'/views/*.html'];
 jsonSources = [outputDir + 'js/*.json'];
 
 
@@ -75,6 +75,7 @@ gulp.task('watch', function() {
   gulp.watch(jsSources, ['js']);
   gulp.watch('components/sass/*.scss', ['compass']);
   gulp.watch('builds/development/*.html', ['html']);
+  gulp.watch('builds/development/views/*.html', ['views']);
   gulp.watch('builds/development/js/*.json', ['json']);
   gulp.watch('builds/development/images/**/*.*', ['images']);
 });
@@ -85,6 +86,13 @@ gulp.task('connect', function() {
     root: outputDir,
     livereload: true
   });
+});
+
+gulp.task('views', function() {
+    gulp.src('builds/development/views/*.html')
+        .pipe(gulpif(env === 'production', minifyHTML()))
+        .pipe(gulpif(env === 'production', gulp.dest(outputDir)))
+        .pipe(connect.reload())
 });
 
 gulp.task('html', function() {
@@ -103,20 +111,6 @@ gulp.task('images', function() {
     })))
     .pipe(gulpif(env === 'production', gulp.dest(outputDir + 'images')))
     .pipe(connect.reload())
-});
-
-gulp.task('sprites', function() {
-    var spriteOutput;
-
-    spriteOutput = gulp.src('builds/development/css/*.css')
-        .pipe(sprite({
-            baseUrl:         "builds/development/images/**/*.*",
-            spriteSheetName: "sprite.png",
-            spriteSheetPath: gulp.dest(outputDir + 'images')
-        }));
-
-    spriteOutput.css.pipe(gulp.dest(outputDir + 'css'));
-    spriteOutput.img.pipe(gulp.dest(outputDir + 'images'));
 });
 
 gulp.task('json', function() {
@@ -139,4 +133,4 @@ gulp.task('lint', function() {
         .pipe(jshint.reporter('default'));
 });
 
-gulp.task('default', ['html', 'json', 'js', 'compass', 'images','sprites', 'connect', 'watch', 'lint', 'open']);
+gulp.task('default', ['html','views', 'json', 'js', 'compass', 'images','sprites', 'connect', 'watch', 'lint', 'open']);
