@@ -35,7 +35,8 @@ if (env === 'development') {
 jsSources = [
   'components/lib/angular/angular.min.js',
   'components/lib/angular/angular-animate.min.js',
-  'components/lib/angular/angular-route.min.js'
+  'components/lib/angular/angular-route.min.js',
+  'builds/development/js/**/*.js'
 ];
 
 jsonSources = [
@@ -43,6 +44,7 @@ jsonSources = [
     'components/lib/angular/angular.min.js.map',
     'components/lib/angular/angular-animate.min.js.map',
     'components/lib/angular/angular-route.min.js.map'
+
 ];
 
 sassSources = ['components/sass/style.scss'];
@@ -133,4 +135,4 @@ gulp.task('lint', function() {
         .pipe(jshint.reporter('default'));
 });
 
-gulp.task('default', ['html','views', 'json', 'js', 'compass', 'images','sprites', 'connect', 'watch', 'lint', 'open']);
+gulp.task('default', ['html','views', 'json', 'js', 'compass', 'images', 'connect', 'watch', 'lint', 'open']);
