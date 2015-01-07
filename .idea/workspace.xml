@@ -1,28 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dd428caf-fe6c-426e-89b0-28d1ceb8c374" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/builds/development/js/controllers/controllers.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/builds/development/js/directives/directives.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/builds/development/js/services/services.js" />
-      <change type="DELETED" beforePath="C:\git-workflow\builds\development\js\controllers\checkins.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\git-workflow\builds\development\js\controllers\meetings.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\git-workflow\builds\development\js\controllers\registration.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\git-workflow\builds\development\js\controllers\status.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\git-workflow\builds\development\js\directives\confirm.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\git-workflow\builds\development\js\services\authentication.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\git-workflow\components\lib\angular\angular-animate.min.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\git-workflow\components\lib\angular\angular-animate.min.js.map" afterPath="" />
-      <change type="DELETED" beforePath="C:\git-workflow\components\lib\angular\angular-route.min.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\git-workflow\components\lib\angular\angular-route.min.js.map" afterPath="" />
-      <change type="DELETED" beforePath="C:\git-workflow\components\lib\angular\angular.min.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\git-workflow\components\lib\angular\angular.min.js.map" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/builds/development/js/app.js" afterPath="$PROJECT_DIR$/builds/development/js/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/builds/development/index.html" afterPath="$PROJECT_DIR$/builds/development/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemas/schemas.js" afterPath="$PROJECT_DIR$/schemas/schemas.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="dd428caf-fe6c-426e-89b0-28d1ceb8c374" name="Default" comment="" />
     <ignored path="workflow.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -44,12 +23,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="controllers.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="controllers.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/builds/development/js/controllers/controllers.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="14" selection-start="334" selection-end="334" vertical-scroll-proportion="0.4450262" vertical-offset="0" max-vertical-offset="867">
+            <state line="36" column="7" selection-start="1511" selection-end="1511" vertical-scroll-proportion="0.0" vertical-offset="408" max-vertical-offset="867">
               <folding>
                 <element signature="e#0#44#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/builds/development/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="29" column="57" selection-start="964" selection-end="964" vertical-scroll-proportion="1.3202248" vertical-offset="23" max-vertical-offset="867">
+              <folding>
+                <marker date="1420666474105" expanded="true" signature="905:1120" placeholder="..." />
+                <marker date="1420666474105" expanded="true" signature="965:1106" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -278,7 +269,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
+              <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -303,14 +294,6 @@
               <option name="myItemId" value="js" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="angular" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
@@ -333,6 +316,7 @@
       <recent name="C:\git-workflow" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\git-workflow\builds\development" />
       <recent name="C:\git-workflow\builds\development\js" />
       <recent name="C:\myproject\workflow\builds\development" />
       <recent name="C:\myproject\workflow\builds\development\images" />
@@ -672,7 +656,7 @@
         <state line="6" column="24" selection-start="164" selection-end="164" vertical-scroll-proportion="0.22972973" vertical-offset="0" max-vertical-offset="444" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/builds/development/js/lib/angular/angular.min.js.map">
+    <entry file="file://$PROJECT_DIR$/builds/development/lib/angular/angular.min.js.map">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="531">
           <folding />
@@ -797,17 +781,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/builds/development/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="57" selection-start="973" selection-end="973" vertical-scroll-proportion="0.79044116" vertical-offset="278" max-vertical-offset="867">
-          <folding>
-            <marker date="1420663516721" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1420663516721" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/builds/development/js/lib/angular/angular.min.js">
+    <entry file="file://$PROJECT_DIR$/builds/development/lib/angular/angular.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="76" column="262" selection-start="36595" selection-end="36595" vertical-scroll-proportion="0.39298245" vertical-offset="1112" max-vertical-offset="3876">
           <folding />
@@ -816,9 +790,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/builds/development/js/controllers/controllers.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="14" selection-start="334" selection-end="334" vertical-scroll-proportion="0.4450262" vertical-offset="0" max-vertical-offset="867">
+        <state line="36" column="7" selection-start="1511" selection-end="1511" vertical-scroll-proportion="0.0" vertical-offset="408" max-vertical-offset="867">
           <folding>
             <element signature="e#0#44#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/builds/development/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="57" selection-start="964" selection-end="964" vertical-scroll-proportion="1.3202248" vertical-offset="23" max-vertical-offset="867">
+          <folding>
+            <marker date="1420666474105" expanded="true" signature="905:1120" placeholder="..." />
+            <marker date="1420666474105" expanded="true" signature="965:1106" placeholder="..." />
           </folding>
         </state>
       </provider>
