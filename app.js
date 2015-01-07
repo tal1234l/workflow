@@ -1,22 +1,22 @@
 
-
 module.exports = function() {
-    var express = require('express');
-    var cookieParser = require('cookie-parser');
-    var bodyParser = require('body-parser');
-    var methodOverride = require('method-override');
-    var errorhandler = require('errorhandler');
-    var routes = require('./routes')();
-    var path = require('path');
-    var nodemailer = require("nodemailer");
+    var express         = require('express');
+    var cookieParser    = require('cookie-parser');
+    var bodyParser      = require('body-parser');
+    var methodOverride  = require('method-override');
+    var errorhandler    = require('errorhandler');
+    var routes          = require('./routes')();
+    var path            = require('path');
+    var nodemailer      = require("nodemailer");
     var app = express();
 
-    var passport = require('passport');
-    var flash 	 = require('connect-flash');
-    var logger        = require('morgan');
+    var passport     = require('passport');
+    var flash 	     = require('connect-flash');
+    var logger       = require('morgan');
     var session      = require('express-session');
 
-
+    var myEnv       = evironment();
+    debugger;
     require('./config/passport')(passport); // pass passport for configuration
 
     // all environments
@@ -28,15 +28,10 @@ module.exports = function() {
     // required for passport
     app.use(logger('combined'));
     app.use(cookieParser());
-    app.use(session({
-        secret: 'secretIdentity13112014',
-        resave: true,
-        cookie: { secure: true },
-        saveUninitialized: true
-    }));
+    app.use(session({secret: 'secretIdentity13112014', resave: true, cookie: { secure: true }, saveUninitialized: true }));
     app.use(passport.initialize());
     app.use(passport.session()); // persistent login sessions
-    app.use(flash()); // use connect-flash for flash messages stored in session
+    app.use(flash());            // use connect-flash for flash messages stored in session
 
     // parse application/x-www-form-urlencoded
     app.use(bodyParser.urlencoded({ extended: false }));
@@ -50,35 +45,26 @@ module.exports = function() {
         res.set('X-Powered-By', 'new identity');
         next();
     });
-    app.use(express.static(path.join(__dirname, 'builds')));
+    debugger;
+    app.use(express.static(path.join(__dirname, 'builds/'+process.env.NODE_ENV)));
+    require('./app/routes.js')(app, passport);
 
-    // development only
-    if (process.env.NODE_ENV === 'development') {
+    if (myEnv.local === 'development') {app.use(errorhandler()) }
 
-        // only use in development
-        app.use(errorhandler())
-    }
-    require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
+    //main routing
+    if(myEnv.remote === 'local' && myEnv.local === 'development'){app.get('/', routes.localDev);}
+    if(myEnv.remote === 'heroku_development'){app.get('/', routes.herokuProd);}
+    if(myEnv.remote === 'heroku_production'){app.get('/', routes.herokuDev);}
 
-    //app.get('/', routes.herokuapp_production);
-    //app.get('/', routes.herokuapp_testing);
-    app.get('/', routes.herokuapp_localhost);
-    //app.get('/', routes.herokuapp_nitrous);
-
-
-    /*app.get('/isRegistered/:PID/:DID',routes.isRegistered);
-    app.get('/qetDoctorQueue/:DID',routes.qetDoctorQueue); 
-    app.get('/doctor/doctor.html', isLoggedIn);
-    app.get('/getDoctorInformation', isLoggedIn ,routes.getDoctorInformation );
-    app.get('/getPatientDiagnostics/:PID/:DID', isLoggedIn ,routes.getPatientDiagnostics);
-    app.get('/downloadForm/:result', isLoggedIn, routes.downloadForm);
-    app.get('/getDoctorsPatients/:doctor_userId' , isLoggedIn ,routes.getAllDoctorsPatients);*/
-
+    //API's
+    app.post('/newDID', routes.createNewDIDNumber);
+    app.get('/getDIDNumber/:country', routes.getDIDNumber);
+    app.post('/freeDIDNumber',routes.freeDIDNumber);
 
     return app;
 }
 
-// route middleware to make sure
+// Route middleware to make sure user is authenticated
 function isLoggedIn(req, res, next) {
 
     // if user is authenticated in the session, carry on
@@ -87,6 +73,14 @@ function isLoggedIn(req, res, next) {
 
     // if they aren't redirect them to the home page
     res.status(200).json({status: 'not authorized'});
+}
+function evironment(){
+    var myEnv={};
+        if (process.env.NODE_ENV === 'development'){myEnv.local = 'development'; myEnv.remote = "local";}
+        if (process.env.NODE_ENV === 'production'){myEnv.local = 'production'; myEnv.remote = "local";}
+        if (process.env.NODE_ENV === 'heroku_development'){myEnv.local = 'development'; myEnv.remote = "heroku_development";}
+        if (process.env.NODE_ENV === 'heroku_production'){myEnv.local = 'production'; myEnv.remote = "heroku_production";}
+    return myEnv
 }
 
 

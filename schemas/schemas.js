@@ -6,13 +6,12 @@ var Schema = mongoose.Schema;
 
 
 //All registered doctors
-var Doctors = new Schema({
-    DID:             String
-    ,ConnectionKey:  String
-    ,doctor_fname:   String
-    ,doctor_lname:   String
-    ,doctor_email:   String
-    ,doctor_user_id: String
+var DIDNumber = new Schema({
+     DID:     String
+    ,country:  String
+    ,in_use:   Boolean
+
+
 });
 
-module.exports.Doctors = mongoose.model('Doctors',Doctors);
+module.exports.DIDNumber = mongoose.model('DIDNumber',DIDNumber);
