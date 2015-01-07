@@ -21,10 +21,10 @@ module.exports = function() {
 
     // all environments
     app.set('port', process.env.PORT || 3000);
-    debugger;
-    app.set('views', __dirname );
+
+    /*app.set('views', __dirname );
     app.set('view engine', 'ejs');
-    app.engine('html', require('ejs').renderFile);
+    app.engine('html', require('ejs').renderFile);*/
 
     // required for passport
     app.use(logger('combined'));

@@ -6,38 +6,41 @@
   <meta name="viewport" content="width=device-width, user-scalable=no">
   <link rel="stylesheet" href="css/style.css">
 
-    <script src="../../components/lib/angular/angular.min.js"></script>
-    <script src="../../components/lib/angular/angular-route.min.js"></script>
-    <script src="../../components/lib/angular/angular-animate.min.js"></script>
+    <script src="js/lib/angular/angular.min.js"></script>
+    <script src="js/lib/angular/angular-route.min.js"></script>
+    <script src="js/lib/angular/angular-animate.min.js"></script>
 
     <!--html templates-->
-    <script src="./js/app.js"></script>
-
+    <!--<script src="./js/app.js"></script>-->
     <!--services-->
-    <script src="./js/services/authentication.js"></script>
-
+    <script src="js/services/services.js"></script>
     <!--controllers-->
-    <script src="./js/controllers/status.js"></script>
-    <script src="./js/controllers/registration.js"></script>
-    <script src="./js/controllers/meetings.js"></script>
-    <script src="./js/controllers/checkins.js"></script>
-
+    <script src="js/controllers/controllers.js"></script>
     <!--directives-->
-    <script src="./js/directives/confirm.js"></script>
+    <script src="js/directives/directives.js"></script>
 
 </head>
-<body>
-<header>
-    <nav class="cf" ng-include="'views/nav.html'"
-         ng-controller="StatusController"></nav>
-</header>
-<div class="page">
-    <div class="userinfo"
-         ng-controller="StatusController" ng-show="currentUser">
-        <span class="user">Hi {{ currentUser.firstname }}</span>
-        <a href="#" ng-click="logout()">logout</a>
-    </div>
-    <main class="cf" ng-view></main>
-</div>
-</body>
+    <body>
+    <ng-view></ng-view>
+
+    <!-- Template -->
+    <script type="text/ng-template" id="/todos.html">
+        Search: <input type="text" ng-model="search.name">
+        <ul>
+            <li ng-repeat="todo in todos | filter: search">
+                <input type="checkbox" ng-model="todo.completed">
+                <a href="#/{{$index}}">{{todo.name}}</a>
+            </li>
+        </ul>
+    </script>
+
+    <!-- Template -->
+    <script type="text/ng-template" id="/todoDetails.html">
+        <h1>{{ todo.name }}</h1>
+        completed: <input type="checkbox" ng-model="todo.completed">
+        note: <textarea>{{ todo.note }}</textarea>
+    </script>
+
+
+    </body>
 </html>

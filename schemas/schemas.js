@@ -10,8 +10,6 @@ var DIDNumber = new Schema({
      DID:     String
     ,country:  String
     ,in_use:   Boolean
-
-
 });
 
 module.exports.DIDNumber = mongoose.model('DIDNumber',DIDNumber);
