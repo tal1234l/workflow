@@ -6,6 +6,8 @@ var gulp = require('gulp'),
     gulpif = require('gulp-if'),
     uglify = require('gulp-uglify'),
     minifyHTML = require('gulp-minify-html'),
+    htmlreplace = require('gulp-html-replace'),
+    minifyCSS = require('gulp-minify-css'),
     jsonminify = require('gulp-jsonminify'),
     imagemin = require('gulp-imagemin'),
     pngquant = require('imagemin-pngquant'),
@@ -16,6 +18,7 @@ var gulp = require('gulp'),
 var env,
     jsSources,
     htmlSources,
+    cssSources,
     devDir,
     prodDir,
     filesToMove,
@@ -25,29 +28,30 @@ env = process.env.NODE_ENV || 'development';
 devDir = 'builds/development/';
 prodDir = 'builds/production/';
 
-
 jsSources = [
     devDir+'/js/*.js',
     devDir+'/js/**/*.js'
 ];
 htmlSources = [devDir + '*.html'];
 pageSources = [devDir +'pages/*.html'];
-
-filesToMove = [
-    '/lib/**/*.*'
-];
+cssSources =  [devDir +'css/*.css'];
+filesToMove = [devDir+'/lib/**/*.*'];
 
 gulp.task('js', function() {
   gulp.src(jsSources)
     .pipe(gulpif(env === 'production',concat('script.js')))
     .pipe(browserify())
-    .pipe(gulpif(env === 'production', uglify()))
+    .pipe(gulpif(env === 'production', uglify({mangle: false})))
     .pipe(gulpif(env === 'production',gulp.dest(prodDir + 'js')))
     .pipe(connect.reload())
 });
 
 gulp.task('html', function() {
     gulp.src(htmlSources)
+        .pipe(gulpif(env === 'production', htmlreplace({
+            'js': 'js/script.js',
+            'css': 'css/style.css'
+        })))
         .pipe(gulpif(env === 'production', minifyHTML()))
         .pipe(gulpif(env === 'production', gulp.dest(prodDir)))
         .pipe(connect.reload())
@@ -56,21 +60,27 @@ gulp.task('html', function() {
 gulp.task('pages', function() {
     gulp.src(pageSources)
         .pipe(gulpif(env === 'production', minifyHTML()))
-        .pipe(gulpif(env === 'production', gulp.dest(prodDir)))
+        .pipe(gulpif(env === 'production', gulp.dest(prodDir+'pages')))
+        .pipe(connect.reload())
+});
+
+gulp.task('css', function() {
+    gulp.src(cssSources)
+        .pipe(gulpif(env === 'production', minifyCSS({keepBreaks:true})))
+        .pipe(gulpif(env === 'production', gulp.dest(prodDir+'css')))
         .pipe(connect.reload())
 });
 
 gulp.task('move', function(){
-    // the base option sets the relative root for the set of files,
-    // preserving the folder structure
-    gulp.src(filesToMove, { base: './' })
-        .pipe(gulpif(env === 'production',gulp.dest('dist')));
+    gulp.src(filesToMove)
+        .pipe(gulpif(env === 'production',gulp.dest(prodDir+'lib')));
 });
 
 gulp.task('watch', function() {
   gulp.watch(jsSources, ['js']);
   gulp.watch(devDir+'/*.html', ['html']);
   gulp.watch(devDir+'/pages/*.html', ['pages']);
+  gulp.watch(devDir+'/css/*.css', ['css']);
 });
 
 gulp.task('connect', function() {
@@ -94,4 +104,4 @@ gulp.task('lint', function() {
         .pipe(jshint.reporter('default'));
 });
 
-gulp.task('default', ['html','move','pages', 'js', 'connect', 'watch', 'lint', 'open']);
+gulp.task('default', ['html','move','pages', 'js','css', 'connect', 'watch', 'lint', 'open']);

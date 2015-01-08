@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
     }
     else{
         console.log('production db is used ');
-       //mongoose.connect('<data base connection string>');
+        mongoose.connect('mongodb://vttechnology:Abcd1234@ds031741.mongolab.com:31741/newidentity_prod');
     }
 
 
