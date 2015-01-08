@@ -15,8 +15,6 @@ module.exports = function() {
     var logger       = require('morgan');
     var session      = require('express-session');
 
-    var myEnv       = evironment();
-
     require('./app_authentication_config/passport')(passport); // pass passport for configuration
 
     // all environments
@@ -49,14 +47,9 @@ module.exports = function() {
     app.use(express.static(path.join(__dirname, 'builds/'+process.env.NODE_ENV)));
     require('./app_authentication/routes.js')(app, passport);
 
-    if (myEnv.local === 'development') {app.use(errorhandler()) }
+    if (process.env.NODE_ENV === 'development') {app.use(errorhandler()) }
 
-    //main routing
-    /*if(myEnv.remote === 'local' && myEnv.local === 'development'){app.get('/', routes.localDev);}
-    if(myEnv.remote === 'heroku_development'){app.get('/', routes.herokuDev);}
-    if(myEnv.remote === 'heroku_production'){app.get('/', routes.herokuProd);}*/
 
-    //API's
     app.post('/newDID', routes.createNewDIDNumber);
     app.get('/getDIDNumber/:country', routes.getDIDNumber);
     app.post('/freeDIDNumber',routes.freeDIDNumber);
@@ -73,14 +66,6 @@ function isLoggedIn(req, res, next) {
 
     // if they aren't redirect them to the home page
     res.status(200).json({status: 'not authorized'});
-}
-function evironment(){
-    var myEnv={};
-        if (process.env.NODE_ENV === 'development'){myEnv.local = 'development'; myEnv.remote = "local";}
-        if (process.env.NODE_ENV === 'production'){myEnv.local = 'production'; myEnv.remote = "local";}
-        if (process.env.NODE_ENV === 'heroku_development'){myEnv.local = 'development'; myEnv.remote = "heroku_development";}
-        if (process.env.NODE_ENV === 'heroku_production'){myEnv.local = 'production'; myEnv.remote = "heroku_production";}
-    return myEnv
 }
 
 
