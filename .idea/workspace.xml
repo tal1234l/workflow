@@ -26,10 +26,19 @@
       <file leaf-file-name="app.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="48" column="82" selection-start="1873" selection-end="1873" vertical-scroll-proportion="0.5405405" vertical-offset="576" max-vertical-offset="1462">
+            <state line="52" column="0" selection-start="2003" selection-end="2003" vertical-scroll-proportion="0.49774775" vertical-offset="663" max-vertical-offset="1428">
               <folding>
                 <element signature="n#!!block;n#isLoggedIn#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="12" column="0" selection-start="382" selection-end="382" vertical-scroll-proportion="-3.16" vertical-offset="125" max-vertical-offset="578">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -95,11 +104,11 @@
         <option value="$PROJECT_DIR$/builds/production/index.html" />
         <option value="$PROJECT_DIR$/builds/development/index.html" />
         <option value="$PROJECT_DIR$/LICENSE" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/db.js" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/gulpfile.js" />
         <option value="$PROJECT_DIR$/routes/index.js" />
+        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/app.js" />
       </list>
     </option>
@@ -562,13 +571,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="24" selection-start="204" selection-end="204" vertical-scroll-proportion="0.28400955" vertical-offset="0" max-vertical-offset="442">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="7" column="3" selection-start="232" selection-end="232" vertical-scroll-proportion="0.268018" vertical-offset="0" max-vertical-offset="1173">
@@ -636,9 +638,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="0" selection-start="382" selection-end="382" vertical-scroll-proportion="-3.16" vertical-offset="125" max-vertical-offset="578">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="82" selection-start="1873" selection-end="1873" vertical-scroll-proportion="0.5405405" vertical-offset="576" max-vertical-offset="1462">
+        <state line="52" column="0" selection-start="2003" selection-end="2003" vertical-scroll-proportion="0.49774775" vertical-offset="663" max-vertical-offset="1428">
           <folding>
             <element signature="n#!!block;n#isLoggedIn#0" expanded="false" />
           </folding>

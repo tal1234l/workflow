@@ -52,8 +52,6 @@ module.exports = function() {
     if (myEnv.local === 'development') {app.use(errorhandler()) }
 
     //main routing
-    app.get('/', routes.herokuProd);
-
     /*if(myEnv.remote === 'local' && myEnv.local === 'development'){app.get('/', routes.localDev);}
     if(myEnv.remote === 'heroku_development'){app.get('/', routes.herokuDev);}
     if(myEnv.remote === 'heroku_production'){app.get('/', routes.herokuProd);}*/

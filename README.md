@@ -13,8 +13,16 @@ and a production environment with magnified files
 
 Commands used for gulp:
 NODE_ENV=production gulp
-NODE_ENV=development gulp
+NODE_ENV=development gulp --> this will minify all the required files and put them under the production build
 
-to use the seed project , clone the code
+To use the seed project , clone the code
 npm install
 and start working
+
+To push to heroku:
+git push heroku master
+
+To change the Heroku evironment variables:
+heroku config:set NODE_ENV=production --> for production testings
+or
+heroku config:set NODE_ENV=development --> for development testings
