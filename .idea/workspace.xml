@@ -23,40 +23,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/builds/development/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="21" selection-start="687" selection-end="687" vertical-scroll-proportion="-1.3076923" vertical-offset="306" max-vertical-offset="1173">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="gulpfile.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gulpfile.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="24" selection-start="842" selection-end="842" vertical-scroll-proportion="-19.615385" vertical-offset="0" max-vertical-offset="1870">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="package.json" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="50" column="24" selection-start="1385" selection-end="1385" vertical-scroll-proportion="-32.692307" vertical-offset="0" max-vertical-offset="1105">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="app.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="53" column="18" selection-start="2022" selection-end="2022" vertical-scroll-proportion="1.5698198" vertical-offset="204" max-vertical-offset="1343">
+            <state line="47" column="0" selection-start="1790" selection-end="1790" vertical-scroll-proportion="0.5022523" vertical-offset="576" max-vertical-offset="1462">
               <folding>
                 <element signature="n#!!block;n#isLoggedIn#0" expanded="false" />
-                <element signature="n#!!block;n#evironment#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -65,7 +37,7 @@
       <file leaf-file-name="index.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="16" selection-start="461" selection-end="461" vertical-scroll-proportion="0.0" vertical-offset="72" max-vertical-offset="629">
+            <state line="15" column="16" selection-start="461" selection-end="461" vertical-scroll-proportion="0.0" vertical-offset="21" max-vertical-offset="629">
               <folding>
                 <element signature="e#897#1809#0" expanded="false" />
                 <element signature="e#1858#2875#0" expanded="false" />
@@ -127,8 +99,8 @@
         <option value="$PROJECT_DIR$/db.js" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/gulpfile.js" />
-        <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/routes/index.js" />
+        <option value="$PROJECT_DIR$/app.js" />
       </list>
     </option>
   </component>
@@ -211,46 +183,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="workflow" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="git-workflow" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="builds" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="development" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="workflow" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="git-workflow" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="builds" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="development" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -281,7 +213,7 @@
       <recent name="C:\myproject\workflow\builds\development\images" />
     </key>
   </component>
-  <component name="RunManager" selected="Node.js.server development">
+  <component name="RunManager" selected="Node.js.server production">
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <option name="VMOptions" />
       <option name="arguments" />
@@ -658,27 +590,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gulpfile.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="24" selection-start="842" selection-end="842" vertical-scroll-proportion="-19.615385" vertical-offset="0" max-vertical-offset="1870">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="24" selection-start="1385" selection-end="1385" vertical-scroll-proportion="-32.692307" vertical-offset="0" max-vertical-offset="1105">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/builds/production/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="42" selection-start="0" selection-end="979" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="405">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/builds/development/js/clientRoutes.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="12" column="0" selection-start="368" selection-end="368" vertical-scroll-proportion="0.2725225" vertical-offset="83" max-vertical-offset="527">
@@ -686,9 +597,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="50" column="24" selection-start="1385" selection-end="1385" vertical-scroll-proportion="2.0334928" vertical-offset="0" max-vertical-offset="1105">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gulpfile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="31" selection-start="779" selection-end="779" vertical-scroll-proportion="-0.52870816" vertical-offset="663" max-vertical-offset="1870">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/builds/development/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="21" selection-start="687" selection-end="687" vertical-scroll-proportion="-1.3076923" vertical-offset="306" max-vertical-offset="1173">
+        <state line="20" column="21" selection-start="687" selection-end="687" vertical-scroll-proportion="0.08133971" vertical-offset="306" max-vertical-offset="1173">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/builds/production/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="42" selection-start="0" selection-end="979" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="405">
           <folding />
         </state>
       </provider>
@@ -706,10 +638,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="18" selection-start="2022" selection-end="2022" vertical-scroll-proportion="1.5698198" vertical-offset="204" max-vertical-offset="1343">
+        <state line="47" column="0" selection-start="1790" selection-end="1790" vertical-scroll-proportion="0.5022523" vertical-offset="576" max-vertical-offset="1462">
           <folding>
             <element signature="n#!!block;n#isLoggedIn#0" expanded="false" />
-            <element signature="n#!!block;n#evironment#0" expanded="false" />
           </folding>
         </state>
       </provider>
