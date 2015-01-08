@@ -18,7 +18,8 @@ var env,
     htmlSources,
     devDir,
     prodDir,
-    filesToMove;
+    filesToMove,
+    pageSources;
 
 env = process.env.NODE_ENV || 'development';
 devDir = 'builds/development/';
@@ -29,7 +30,8 @@ jsSources = [
     devDir+'/js/*.js',
     devDir+'/js/**/*.js'
 ];
-htmlSources = [devDir + '*.html', devDir +'/pages/*.html'];
+htmlSources = [devDir + '*.html'];
+pageSources = [devDir +'pages/*.html'];
 
 filesToMove = [
     '/lib/**/*.*'
@@ -51,7 +53,14 @@ gulp.task('html', function() {
         .pipe(connect.reload())
 });
 
-gulp.task('move',['clean'], function(){
+gulp.task('pages', function() {
+    gulp.src(pageSources)
+        .pipe(gulpif(env === 'production', minifyHTML()))
+        .pipe(gulpif(env === 'production', gulp.dest(prodDir)))
+        .pipe(connect.reload())
+});
+
+gulp.task('move', function(){
     // the base option sets the relative root for the set of files,
     // preserving the folder structure
     gulp.src(filesToMove, { base: './' })
@@ -67,7 +76,7 @@ gulp.task('watch', function() {
 gulp.task('connect', function() {
   connect.server({
 	port: 9000,
-    root: outputDir,
+    root: 'builds/'+env+'/',
     livereload: true
   });
 });
@@ -85,4 +94,4 @@ gulp.task('lint', function() {
         .pipe(jshint.reporter('default'));
 });
 
-gulp.task('default', ['html','move', 'js', 'connect', 'watch', 'lint', 'open']);
+gulp.task('default', ['html','move','pages', 'js', 'connect', 'watch', 'lint', 'open']);
