@@ -6,8 +6,7 @@
   "main": "server.js",
   "private": true,
   "scripts": {
-    "build": "NODE_ENV=production gulp",
-    "start": "NODE_ENV=production node server.js"
+    "start": " node server.js"
   },
   "repository": {
     "type": "git",
