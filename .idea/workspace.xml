@@ -26,7 +26,7 @@
       <file leaf-file-name="app.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="47" column="0" selection-start="1790" selection-end="1790" vertical-scroll-proportion="0.5022523" vertical-offset="576" max-vertical-offset="1462">
+            <state line="48" column="82" selection-start="1873" selection-end="1873" vertical-scroll-proportion="0.5405405" vertical-offset="576" max-vertical-offset="1462">
               <folding>
                 <element signature="n#!!block;n#isLoggedIn#0" expanded="false" />
               </folding>
@@ -638,7 +638,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="0" selection-start="1790" selection-end="1790" vertical-scroll-proportion="0.5022523" vertical-offset="576" max-vertical-offset="1462">
+        <state line="48" column="82" selection-start="1873" selection-end="1873" vertical-scroll-proportion="0.5405405" vertical-offset="576" max-vertical-offset="1462">
           <folding>
             <element signature="n#!!block;n#isLoggedIn#0" expanded="false" />
           </folding>

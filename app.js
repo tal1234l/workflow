@@ -46,7 +46,7 @@ module.exports = function() {
         next();
     });
 
-    app.use(express.static(path.join(__dirname, 'builds/production/')));
+    app.use(express.static(path.join(__dirname, 'builds/'+process.env.NODE_ENV)));
     require('./app_authentication/routes.js')(app, passport);
 
     if (myEnv.local === 'development') {app.use(errorhandler()) }
