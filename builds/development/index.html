@@ -1,17 +1,23 @@
 <!doctype html>
-<html lang="en" ng-app="myApp">
+<html lang="en" ng-app="mainApp">
 <head>
   <meta charset="UTF-8">
   <title>Seed project</title>
   <meta name="viewport" content="width=device-width, user-scalable=no">
-  <link rel="stylesheet" href="css/style.css">
 
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Bootstrap lib + fontawesome -->
+    <link rel="stylesheet" href="lib/bootstrap/bootstrap.min.css" >
+    <link rel="stylesheet" href="lib/fonts/fontawesome.min.css" >
+
+    <!-- Angular libs -->
     <script src="lib/angular/angular.min.js"></script>
     <script src="lib/angular/angular-route.min.js"></script>
     <script src="lib/angular/angular-animate.min.js"></script>
 
     <!--html templates-->
-    <!--<script src="./js/app.js"></script>-->
+    <script src="./js/clientRoutes.js"></script>
     <!--services-->
     <script src="js/services/services.js"></script>
     <!--controllers-->
@@ -21,26 +27,34 @@
 
 </head>
     <body>
-    <ng-view></ng-view>
 
-    <!-- Template -->
-    <script type="text/ng-template" id="/todos.html">
-        Search: <input type="text" ng-model="search.name">
-        <ul>
-            <li ng-repeat="todo in todos | filter: search">
-                <input type="checkbox" ng-model="todo.completed">
-                <a href="#/{{$index}}">{{todo.name}}</a>
-            </li>
-        </ul>
-    </script>
+    <!-- HEADER AND NAVBAR -->
+    <header>
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">Seed web application</a>
+                </div>
 
-    <!-- Template -->
-    <script type="text/ng-template" id="/todoDetails.html">
-        <h1>{{ todo.name }}</h1>
-        completed: <input type="checkbox" ng-model="todo.completed">
-        note: <textarea>{{ todo.note }}</textarea>
-    </script>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+                    <li><a href="/about"><i class="fa fa-shield"></i> About</a></li>
+                    <li><a href="/contact"><i class="fa fa-comment"></i> Contact</a></li>
+                </ul>
+            </div> <!--container-->
+        </nav>
+    </header>
 
+
+
+    <!-- MAIN CONTENT AND INJECTED VIEWS -->
+    <div id="main">
+        <!-- angular templating -->
+
+        <!-- this is where content will be injected -->
+        <div ng-view></div>
+
+    </div>
 
     </body>
 </html>

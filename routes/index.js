@@ -14,7 +14,7 @@ module.exports = function (flights) {
     //local developing
     functions.localDev = function(req, res){res.redirect('http://localhost:3000/index.html');};
     //remote dev
-    functions.herokuDev = function(req, res){res.redirect('https://newidentitydev.herokuapp.com//index.html');};
+    functions.herokuDev = function(req, res){res.redirect('https://newidentitydev.herokuapp.com/index.html');};
     //remote production
     functions.herokuProd = function(req, res){res.redirect('https://newidentity.herokuapp.com/index.html');};
     //===========================================================================================================//
