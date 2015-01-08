@@ -1,7 +1,6 @@
 var gulp = require('gulp'),
     gutil = require('gulp-util'),
     browserify = require('gulp-browserify'),
-    compass = require('gulp-compass'),
     connect = require('gulp-connect'),
     jshint = require('gulp-jshint'),
     gulpif = require('gulp-if'),
@@ -16,70 +15,53 @@ var gulp = require('gulp'),
 
 var env,
     jsSources,
-    sassSources,
     htmlSources,
-    jsonSources,
-    outputDir,
-    sassStyle;
+    devDir,
+    prodDir,
+    filesToMove;
 
 env = process.env.NODE_ENV || 'development';
+devDir = 'builds/development/';
+prodDir = 'builds/production/';
 
-if (env === 'development') {
-  outputDir = 'builds/development/';
-  sassStyle = 'expanded';
-} else {
-  outputDir = 'builds/production/';
-  sassStyle = 'compressed';
-}
 
 jsSources = [
-  'components/lib/angular/angular.min.js',
-  'components/lib/angular/angular-animate.min.js',
-  'components/lib/angular/angular-route.min.js',
-  'builds/development/js/**/*.js'
+    devDir+'/js/*.js',
+    devDir+'/js/**/*.js'
 ];
+htmlSources = [devDir + '*.html', devDir +'/pages/*.html'];
 
-jsonSources = [
-    'builds/development/js/*.json',
-    'components/lib/angular/angular.min.js.map',
-    'components/lib/angular/angular-animate.min.js.map',
-    'components/lib/angular/angular-route.min.js.map'
-
+filesToMove = [
+    '/lib/**/*.*'
 ];
-
-sassSources = ['components/sass/style.scss'];
-htmlSources = [outputDir + '*.html', outputDir +'/views/*.html'];
-jsonSources = [outputDir + 'js/*.json'];
-
 
 gulp.task('js', function() {
   gulp.src(jsSources)
-    .pipe(concat('script.js'))
+    .pipe(gulpif(env === 'production',concat('script.js')))
     .pipe(browserify())
     .pipe(gulpif(env === 'production', uglify()))
-    .pipe(gulp.dest(outputDir + 'js'))
+    .pipe(gulpif(env === 'production',gulp.dest(prodDir + 'js')))
     .pipe(connect.reload())
 });
 
-gulp.task('compass', function() {
-  gulp.src(sassSources)
-    .pipe(compass({
-      sass: 'components/sass',
-      image: outputDir + 'images',
-      style: sassStyle
-    })
-    .on('error', gutil.log))
-    .pipe(gulp.dest(outputDir + 'css'))
-    .pipe(connect.reload())
+gulp.task('html', function() {
+    gulp.src(htmlSources)
+        .pipe(gulpif(env === 'production', minifyHTML()))
+        .pipe(gulpif(env === 'production', gulp.dest(prodDir)))
+        .pipe(connect.reload())
+});
+
+gulp.task('move',['clean'], function(){
+    // the base option sets the relative root for the set of files,
+    // preserving the folder structure
+    gulp.src(filesToMove, { base: './' })
+        .pipe(gulpif(env === 'production',gulp.dest('dist')));
 });
 
 gulp.task('watch', function() {
   gulp.watch(jsSources, ['js']);
-  gulp.watch('components/sass/*.scss', ['compass']);
-  gulp.watch('builds/development/*.html', ['html']);
-  gulp.watch('builds/development/pages/*.html', ['pages']);
-  gulp.watch('builds/development/js/*.json', ['json']);
-  gulp.watch('builds/development/images/**/*.*', ['images']);
+  gulp.watch(devDir+'/*.html', ['html']);
+  gulp.watch(devDir+'/pages/*.html', ['pages']);
 });
 
 gulp.task('connect', function() {
@@ -90,49 +72,17 @@ gulp.task('connect', function() {
   });
 });
 
-gulp.task('pages', function() {
-    gulp.src('builds/development/pages/*.html')
-        .pipe(gulpif(env === 'production', minifyHTML()))
-        .pipe(gulpif(env === 'production', gulp.dest(outputDir)))
-        .pipe(connect.reload())
-});
-
-gulp.task('html', function() {
-  gulp.src('builds/development/*.html')
-    .pipe(gulpif(env === 'production', minifyHTML()))
-    .pipe(gulpif(env === 'production', gulp.dest(outputDir)))
-    .pipe(connect.reload())
-});
-
-gulp.task('images', function() {
-  gulp.src('builds/development/images/**/*.*')
-    .pipe(gulpif(env === 'production', imagemin({
-      progressive: true,
-      svgoPlugins: [{ removeViewBox: false }],
-      use: [pngquant()]
-    })))
-    .pipe(gulpif(env === 'production', gulp.dest(outputDir + 'images')))
-    .pipe(connect.reload())
-});
-
-gulp.task('json', function() {
-  gulp.src(jsonSources)
-    .pipe(gulpif(env === 'production', jsonminify()))
-    .pipe(gulpif(env === 'production', gulp.dest('builds/production/js')))
-    .pipe(connect.reload())
-});
-
 gulp.task('open', function(){
-    gulp.src('builds/development/*.html')
+    gulp.src('builds/'+env+'/*.html')
         .pipe(open('', {app: 'chrome', url: 'http://localhost:9000'}));
 });
 
 // JSHint task
 gulp.task('lint', function() {
-    return gulp.src(gulp.dest(outputDir)+'/js/*.js')
+    return gulp.src(gulp.dest(devDir)+'/js/**/*.js')
         .pipe(jshint())
         // You can look into pretty reporters as well
         .pipe(jshint.reporter('default'));
 });
 
-gulp.task('default', ['html','pages', 'json', 'js', 'compass', 'images', 'connect', 'watch', 'lint', 'open']);
+gulp.task('default', ['html','move', 'js', 'connect', 'watch', 'lint', 'open']);
