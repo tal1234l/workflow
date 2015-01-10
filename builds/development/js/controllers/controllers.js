@@ -20,7 +20,7 @@ mainApp.controller('contactController',['$scope', function($scope) {
     $scope.pageClass = 'page-contact';
 }]);
 
-mainApp.controller('registerController',['$scope','$http', function($scope, $http) {
+mainApp.controller('registerController',['$scope','$http','authToken', function($scope, $http, authToken) {
     $scope.submit = function(){
         var url = 'http://'+ window.location.host + '/register';
         var user = {
@@ -32,10 +32,15 @@ mainApp.controller('registerController',['$scope','$http', function($scope, $htt
             .success(function(res){
                 console.log(res);
                 toastr.success('you have successfully registered','Success');
+                authToken.setToken(res.token);
             })
             .error(function(err){
                 toastr.error('Could not register','Opps!');
             });
         console.log('test');
     };
+}]);
+
+mainApp.controller('headerController', ['$scope', 'authToken', function($scope, authToken){
+    $scope.isAuthenticated = authToken.isAuthenticated();
 }]);
