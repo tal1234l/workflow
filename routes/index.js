@@ -2,7 +2,7 @@
 var AllSchemas = require('../schemas/schemas');
 var nodemailer = require("nodemailer");
 var formidable = require('formidable');
-
+var jwt        = require('../services/jwt');
 var buffer;
 
 
@@ -10,16 +10,27 @@ module.exports = function (flights) {
 
     var functions = {};
 
-    //=============================================================================================================//
-    //local developing
-    functions.localDev = function(req, res){res.redirect('http://localhost:3000/index.html');};
-    //remote dev
-    functions.herokuDev = function(req, res){res.redirect('https://seedproject-prod.herokuapp.com/index.html');};
-    //remote production
-    functions.herokuProd = function(req, res){res.redirect('https://seedproject-prod.herokuapp.com/index.html');};
-    //===========================================================================================================//
-
     //API's
+    functions.createNewUsers = function(req,res){
+        var user =  new AllSchemas.Users(req.body);
+        var newUser = new AllSchemas.Users({
+            name: user.name,
+            password: user.password
+        });
+        var payload = {
+          iss:req.hostname,
+          sub: user.id
+        };
+        var token = jwt.encode(payload, "shh...");
+
+        newUser.save(function(err){
+            //Remove the password before sending to client
+            res.status(200).send({
+                user: newUser.toJSON(),
+                token: token
+            });
+        });
+    };
     functions.createNewDIDNumber = function(req, res){
         var DID = req.param('DID');
         //check that number is not in the DB

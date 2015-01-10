@@ -22,11 +22,15 @@ mainApp.controller('contactController',['$scope', function($scope) {
 
 mainApp.controller('registerController',['$scope','$http', function($scope, $http) {
     $scope.submit = function(){
-        var url ='/';
-        var user = {};
+        var url = 'http://'+ window.location.host + '/register';
+        var user = {
+            name: $scope.email,
+            password: $scope.password
+        };
+        console.log('url: '+ url);
         $http.post(url,user)
             .success(function(res){
-                console.log("good!");
+                console.log(res);
                 toastr.success('you have successfully registered','Success');
             })
             .error(function(err){

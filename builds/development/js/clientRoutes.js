@@ -27,9 +27,9 @@ mainApp.config(function($locationProvider, $urlRouterProvider, $stateProvider) {
             controller: 'contactController'
         })
         // route for the login page
-        .state('login', {
-            url:'/',
-            templateUrl : '/pages/login.html',
+        .state('register', {
+            url:'/register',
+            templateUrl : '/pages/register.html',
             controller: 'registerController'
         })
 });

@@ -17,11 +17,7 @@ module.exports = function() {
 
     require('./app_authentication_config/passport')(passport); // pass passport for configuration
 
-    // all environments
     app.set('port', process.env.PORT || 3000);
-/*    app.set('views', __dirname +'/views' );
-    app.set('view engine', 'ejs');
-    app.engine('html', require('ejs').renderFile);*/
 
     // required for passport
     app.use(logger('combined'));
@@ -41,6 +37,9 @@ module.exports = function() {
 
     app.use(function (req, res, next) {
         res.set('X-Powered-By', 'new identity');
+        res.header('Access-Control-Allow-Origin','*');
+        res.header('Access-Control-Allow-Methods','GET,PUT,POST,DELETE');
+        res.header('Access-Control-Allow-Headers','Content-Type, Authorization');
         next();
     });
 
@@ -49,7 +48,7 @@ module.exports = function() {
 
     if (process.env.NODE_ENV === 'development') {app.use(errorhandler()) }
 
-
+    app.post('/register',routes.createNewUsers);
     app.post('/newDID', routes.createNewDIDNumber);
     app.get('/getDIDNumber/:country', routes.getDIDNumber);
     app.post('/freeDIDNumber',routes.freeDIDNumber);

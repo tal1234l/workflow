@@ -119,8 +119,7 @@ main {
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Bree Serif', serif;
     font-weight: normal;
-    color: #475b62;
-    text-shadow: 1px 1px rgba(255,255,255, 1);
+    color: #ffffff;
 }
 
 a {
