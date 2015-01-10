@@ -1,26 +1,32 @@
-var mainApp = angular.module('mainApp', ['ngRoute', 'ngAnimate']);
+var mainApp = angular.module('mainApp', ['ui.router','ngAnimate']);
 
 // configure our routes
-mainApp.config(function($locationProvider, $routeProvider) {
+mainApp.config(function($locationProvider, $urlRouterProvider, $stateProvider) {
+    $urlRouterProvider.otherwise('/');
     $locationProvider.html5Mode(true);
-    $routeProvider
+    $stateProvider
 
         // route for the home page
-        .when('/', {
-            templateUrl : '/pages/home.html',
-            controller  : 'mainController'
+        .state('home', {
+            url:'/',
+            templateUrl : '/pages/home.html'
         })
 
         // route for the about page
-        .when('/about', {
-            templateUrl : '/pages/about.html',
-            controller  : 'aboutController'
+        .state('about', {
+            url:'/about',
+            templateUrl : '/pages/about.html'
         })
 
         // route for the contact page
-        .when('/contact', {
-            templateUrl : '/pages/contact.html',
-            controller  : 'contactController'
+        .state('contact', {
+            url:'/contact',
+            templateUrl : '/pages/contact.html'
         })
-        .otherwise({ redirectTo: '/home' });
+        // route for the login page
+        .state('login', {
+            url:'/',
+            templateUrl : '/pages/login.html'
+        })
 });
+

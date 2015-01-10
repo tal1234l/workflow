@@ -207,21 +207,61 @@ nav ul li a:hover {
 
 /* ANIMATIONS
 ============================================================================= */
-.ng-enter 	{
+.well[ui-view]{
+    height: 65px;
+}
+
+[ui-view].ng-enter 	{
     transition:0.5s;
     opacity: 0;
 }
-.ng-enter-active{
+[ui-view].ng-enter-active{
     opacity: 1;
 }
-.ng-leave 	{
+[ui-view].ng-leave 	{
     transition: 0.5s;
     opacity: 1;
 }
-.ng-leave-cative{
+[ui-view].ng-leave-active{
     opacity: 0;
+}
+/* ========================================================================= */
+
+
+/*FORMS
+============================================================================= */
+.form-signin {
+    max-width: 280px;
+    padding: 15px;
+    margin: 0 auto;
+    margin-top:50px;
+}
+.form-signin .form-signin-heading, .form-signin {
+    margin-bottom: 10px;
+}
+.form-signin .form-control {
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+.form-signin input[type="text"] {
 
 }
+.form-signin input[type="password"] {
 
+    border-top:1px solid rgba(0,0,0,0.08);
+}
+.form-signin-heading.text-muted {
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 2px 2px rgba(0,0,0,0.5);
+}
 
 /* ========================================================================= */
