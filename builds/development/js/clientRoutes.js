@@ -9,24 +9,28 @@ mainApp.config(function($locationProvider, $urlRouterProvider, $stateProvider) {
         // route for the home page
         .state('home', {
             url:'/',
-            templateUrl : '/pages/home.html'
+            templateUrl : '/pages/home.html',
+            controller: 'homeController'
         })
 
         // route for the about page
         .state('about', {
             url:'/about',
-            templateUrl : '/pages/about.html'
+            templateUrl : '/pages/about.html',
+            controller: 'aboutController'
         })
 
         // route for the contact page
         .state('contact', {
             url:'/contact',
-            templateUrl : '/pages/contact.html'
+            templateUrl : '/pages/contact.html',
+            controller: 'contactController'
         })
         // route for the login page
         .state('login', {
             url:'/',
-            templateUrl : '/pages/login.html'
+            templateUrl : '/pages/login.html',
+            controller: 'registerController'
         })
 });
 
