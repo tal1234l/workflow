@@ -19,7 +19,7 @@ module.exports = function (flights) {
         });
         var payload = {
           iss:req.hostname,
-          sub: user.id
+          sub: newUser.id
         };
         var token = jwt.encode(payload, "shh...");
 
@@ -116,7 +116,24 @@ module.exports = function (flights) {
         });
 
     };
+    functions.getIdentities = function(req,res){
+        var identities = [
+            'tal','gil','ron','jon1'
+        ];
+        var token = req.headers.authorization.split(' ')[1];
+        var payload = jwt.decode(token,"shh...");
+        if(!payload.sub)
+        {
+            res.status(401).send({
+                message: 'Authorization failed'
+            });
+        }
 
+        if(!req.headers.authorization){
+            return res.status(401).json({status: 'you are not authorized'});;
+        }
+        res.json(identities);
+    };
 
     return functions;
 

@@ -48,10 +48,12 @@ module.exports = function() {
 
     if (process.env.NODE_ENV === 'development') {app.use(errorhandler()) }
 
+    //API'S
     app.post('/register',routes.createNewUsers);
     app.post('/newDID', routes.createNewDIDNumber);
     app.get('/getDIDNumber/:country', routes.getDIDNumber);
     app.post('/freeDIDNumber',routes.freeDIDNumber);
+    app.get('/getIdentities',routes.getIdentities);
 
     return app;
 }

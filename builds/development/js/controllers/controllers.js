@@ -1,7 +1,7 @@
 /**
  * Created by talwa_000 on 07/01/15.
  */
-
+'use strict';
 
 // create the controller and inject Angular's $scope
 mainApp.controller('homeController',['$scope', function($scope) {
@@ -20,9 +20,9 @@ mainApp.controller('contactController',['$scope', function($scope) {
     $scope.pageClass = 'page-contact';
 }]);
 
-mainApp.controller('registerController',['$scope','$http','authToken', function($scope, $http, authToken) {
+mainApp.controller('registerController',['$rootScope','$scope','$http','authToken','$state', 'API_URL', function($rootScope, $scope, $http, authToken, $state, API_URL) {
     $scope.submit = function(){
-        var url = 'http://'+ window.location.host + '/register';
+        var url = API_URL + '/register';
         var user = {
             name: $scope.email,
             password: $scope.password
@@ -31,8 +31,10 @@ mainApp.controller('registerController',['$scope','$http','authToken', function(
         $http.post(url,user)
             .success(function(res){
                 console.log(res);
-                toastr.success('you have successfully registered','Success');
+                toastr.success('Account ' +res.user.name+' , successfully created');
                 authToken.setToken(res.token);
+                $rootScope.isAuthenticated = true;
+                $state.go('home');
             })
             .error(function(err){
                 toastr.error('Could not register','Opps!');
@@ -41,6 +43,22 @@ mainApp.controller('registerController',['$scope','$http','authToken', function(
     };
 }]);
 
-mainApp.controller('headerController', ['$scope', 'authToken', function($scope, authToken){
-    $scope.isAuthenticated = authToken.isAuthenticated();
+mainApp.controller('headerController', ['$rootScope','$scope', 'authToken','$state', function($rootScope, $scope, authToken, $state){
+    $rootScope.isAuthenticated = authToken.isAuthenticated();
+    $scope.logout = function(){
+        authToken.removeToken();
+        $rootScope.isAuthenticated = false;
+        $state.go('home');
+    };
+}]);
+
+mainApp.controller('identitiesController', ['$scope','$http','API_URL', function($scope, $http, API_URL){
+    $http.get(API_URL + '/getIdentities')
+        .success(function(res){
+            console.log(res);
+            $scope.identities = res;
+        })
+        .error(function(err){
+            toastr.warning('Could not get identities','warning!');
+        });
 }]);

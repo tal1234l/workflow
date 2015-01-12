@@ -180,7 +180,13 @@ nav ul li a:hover {
     background-color: #45B29D;
     color: #E0E7AB;
 }
+[ng-click]{
+    cursor: pointer;
+}
 
+.logout, .register{
+    float: right !important;
+}
 /*===================================================================*/
 /* make our pages be full width and full height */
 /* positioned absolutely so that the pages can overlap each other as they enter and leave */

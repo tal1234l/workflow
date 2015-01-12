@@ -60,12 +60,13 @@
                         <li ui-sref-active ="active"><a ui-sref="home"><i class="fa fa-home"></i> Home</a></li>
                         <li ui-sref-active ="active"><a ui-sref="about"><i class="fa fa-shield"></i> About</a></li>
                         <li ui-sref-active ="active"><a ui-sref="contact"><i class="fa fa-comment"></i> Contact</a></li>
-                        <li ng-if="!isAuthenticated" ui-sref-active ="active"><a ui-sref="register"><i class="fa fa-sign-in"></i> Register</a></li>
+                        <li ng-if="isAuthenticated" ui-sref-active ="active"><a ui-sref="identities"><i class="fa fa-group"></i> Identities</a></li>
+                        <li ng-if="!isAuthenticated" ui-sref-active ="active" class="register"><a ui-sref="register"><i class="fa fa-sign-in "></i> Register</a></li>
+                        <li ng-if="isAuthenticated" ui-sref-active ="active" class="logout"><a ng-click="logout()"><i class="fa fa-sign-out"></i> Logout</a></li>
                     </ul>
                 </div> <!--container-->
             </nav>
         </header>
-        <!-- angular templating -->
 
         <!-- this is where content will be injected -->
         <div ui-view ></div>
