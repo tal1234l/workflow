@@ -1,8 +1,7 @@
 
 var AllSchemas = require('../schemas/schemas');
 var nodemailer = require("nodemailer");
-var formidable = require('formidable');
-var jwt        = require('../services/jwt');
+var jwt        = require('jwt-simple');
 var buffer;
 
 
@@ -12,22 +11,38 @@ module.exports = function (flights) {
 
     //API's
     functions.createNewUsers = function(req,res){
-        var user =  new AllSchemas.Users(req.body);
-        var newUser = new AllSchemas.Users({
-            name: user.name,
-            password: user.password
-        });
-        var payload = {
-          iss:req.hostname,
-          sub: newUser.id
-        };
-        var token = jwt.encode(payload, "shh...");
+        req.user = req.body;
+        AllSchemas.Users.findOne({name: req.user.name},function(err, user){
+            if(err) throw err;
+            if(user)
+                return res.status(400).send({message:'user name already taken'});
+            else{
+                var newUser = new AllSchemas.Users({
+                    name: req.user.name,
+                    password: req.user.password
+                });
+                createAndSendToken(newUser,res);
+                newUser.save(function(err){
+                    if (err) throw err;
+                });
+            }
 
-        newUser.save(function(err){
-            //Remove the password before sending to client
-            res.status(200).send({
-                user: newUser.toJSON(),
-                token: token
+        });
+    };
+    functions.loginUser = function(req, res){
+        req.user = req.body;
+        AllSchemas.Users.findOne({name: req.user.name},function(err, user){
+            if(err)
+                throw Error('no user');
+            if(!user)
+                return res.status(401).send({message:'wrong user name / password'});
+
+            user.comparePasswords(req.user.password, function(err, isMatch){
+                if (err) throw err;
+                if(!isMatch)
+                    return res.status(401).send({message:'wrong user name / password'});
+                createAndSendToken(user,res);
+
             });
         });
     };
@@ -138,4 +153,16 @@ module.exports = function (flights) {
     return functions;
 
 };
+
+function createAndSendToken(user, res){
+    var payload = {
+        sub: user.id
+    };
+    var token = jwt.encode(payload, "shh...");
+    res.status(200).send({
+        //Remove the password before sending to client -> user.toJSON()
+        user: user.toJSON(),
+        token: token
+    });
+}
 

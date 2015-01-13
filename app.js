@@ -49,24 +49,19 @@ module.exports = function() {
     if (process.env.NODE_ENV === 'development') {app.use(errorhandler()) }
 
     //API'S
-    app.post('/register',routes.createNewUsers);
+    app.post('/registerUser',routes.createNewUsers);
+    app.post('/loginUser',routes.loginUser);
     app.post('/newDID', routes.createNewDIDNumber);
     app.get('/getDIDNumber/:country', routes.getDIDNumber);
     app.post('/freeDIDNumber',routes.freeDIDNumber);
     app.get('/getIdentities',routes.getIdentities);
 
+    app.get('/*',function(req, res, next){
+        res.redirect('http://' + req.headers.host + '/');
+        next();
+    });
+
     return app;
-}
-
-// Route middleware to make sure user is authenticated
-function isLoggedIn(req, res, next) {
-
-    // if user is authenticated in the session, carry on
-    if (req.isAuthenticated())
-        return next();
-
-    // if they aren't redirect them to the home page
-    res.status(200).json({status: 'not authorized'});
 }
 
 

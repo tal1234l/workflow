@@ -40,6 +40,9 @@ Users.methods.toJSON = function(){
     delete user.password;
     return user;
 };
+Users.methods.comparePasswords = function(password, callback){
+ bcrypt.compare(password, this.password, callback);
+}
 
 module.exports.DIDNumber = mongoose.model('DIDNumber',DIDNumber);
 module.exports.Users = mongoose.model('Users',Users);

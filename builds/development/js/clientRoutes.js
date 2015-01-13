@@ -1,7 +1,7 @@
 var mainApp = angular.module('mainApp', ['ui.router','ngAnimate']);
 
 // configure our routes
-mainApp.config(function($locationProvider, $urlRouterProvider, $stateProvider, $httpProvider) {
+mainApp.config(['$locationProvider','$urlRouterProvider','$stateProvider','$httpProvider',function($locationProvider, $urlRouterProvider, $stateProvider, $httpProvider) {
     $urlRouterProvider.otherwise('/');
     $locationProvider.html5Mode(true);
     $stateProvider
@@ -37,9 +37,14 @@ mainApp.config(function($locationProvider, $urlRouterProvider, $stateProvider, $
             url:'/register',
             templateUrl : '/pages/register.html',
             controller: 'registerController'
+        })
+        .state('login', {
+            url:'/login',
+            templateUrl : '/pages/login.html',
+            controller: 'loginController'
         });
 
-        $httpProvider.interceptors.push('authInterceptor');
+        /*$httpProvider.interceptors.push('authInterceptor');*/
 
-}).constant('API_URL','http://'+ window.location.host);
+}]).constant('API_URL','http://'+ window.location.host);
 
