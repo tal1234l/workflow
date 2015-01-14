@@ -44,5 +44,19 @@ angular.module('mainApp').factory('authInterceptor',['authToken', function(authT
             return response;
         }
     };
+}]);
+angular.module('mainApp').service('auth',['$http','API_URL','authToken','$state', function auth($http,API_URL,authToken,$state){
+    function authSuccessful(res){
+        authToken.setToken(res.token);
+        $state.go('home');
+    };
+    this.login = function(email,password){
+        return $http.post(API_URL + '/loginUser', {name: email, password: password})
+            .success(authSuccessful);
+    };
+    this.register = function(email,password){
+        return $http.post(API_URL + '/registerUser', {name: email, password: password})
+            .success(authSuccessful);
 
+    };
 }]);

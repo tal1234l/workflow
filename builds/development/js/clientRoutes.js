@@ -44,7 +44,7 @@ mainApp.config(['$locationProvider','$urlRouterProvider','$stateProvider','$http
             controller: 'loginController'
         });
 
-        /*$httpProvider.interceptors.push('authInterceptor');*/
+        $httpProvider.interceptors.push('authInterceptor');
 
 }]).constant('API_URL','http://'+ window.location.host);
 

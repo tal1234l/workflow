@@ -12,6 +12,10 @@ module.exports = function (flights) {
     //API's
     functions.createNewUsers = function(req,res){
         req.user = req.body;
+        debugger;
+        if(!req.user.name || !req.user.password)
+            return res.status(401).send({message:'wrong user name / password'});
+
         AllSchemas.Users.findOne({name: req.user.name},function(err, user){
             if(err) throw err;
             if(user)
@@ -31,14 +35,18 @@ module.exports = function (flights) {
     };
     functions.loginUser = function(req, res){
         req.user = req.body;
+        /*validation.validatLogin(req.user.name,req.user.password);*/
+        if(!req.user.name || !req.user.password)
+            return res.status(401).send({message:'wrong user name / password'});
+
         AllSchemas.Users.findOne({name: req.user.name},function(err, user){
             if(err)
-                throw Error('no user');
+                throw Error({message:'no user'});
             if(!user)
                 return res.status(401).send({message:'wrong user name / password'});
 
             user.comparePasswords(req.user.password, function(err, isMatch){
-                if (err) throw err;
+                if (err) throw Error({message:'password is not correct'});
                 if(!isMatch)
                     return res.status(401).send({message:'wrong user name / password'});
                 createAndSendToken(user,res);
@@ -164,5 +172,11 @@ function createAndSendToken(user, res){
         user: user.toJSON(),
         token: token
     });
-}
+};
+/*var validation = {
+    validatLogin : function(name, password, res){
+        if(!name || !password)
+            return res.status(401).send({message:'wrong user name / password'});
+    }
+};*/
 
