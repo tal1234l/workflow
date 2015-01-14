@@ -1,4 +1,3 @@
-
 module.exports = function() {
     var express         = require('express');
     var cookieParser    = require('cookie-parser');
@@ -11,19 +10,24 @@ module.exports = function() {
     var app = express();
 
     var passport     = require('passport');
+    var localStrategy = require('passport-local').Strategy;
+
+    var AllSchemas   = require('./schemas/schemas');
     var flash 	     = require('connect-flash');
     var logger       = require('morgan');
     var session      = require('express-session');
 
-    require('./app_authentication_config/passport')(passport); // pass passport for configuration
 
     app.set('port', process.env.PORT || 3000);
 
     // required for passport
     app.use(logger('combined'));
     app.use(cookieParser());
-    app.use(session({secret: 'secretIdentity13112014', resave: true, cookie: { secure: true }, saveUninitialized: true }));
+    /*app.use(session({secret: 'secretIdentity13112014', resave: true, cookie: { secure: true }, saveUninitialized: true }));*/
     app.use(passport.initialize());
+    passport.serializeUser(function(user, done){
+       done(null, user.id);
+    });
     app.use(passport.session()); // persistent login sessions
     app.use(flash());            // use connect-flash for flash messages stored in session
 
@@ -44,13 +48,46 @@ module.exports = function() {
     });
 
     app.use(express.static(path.join(__dirname, 'builds/'+process.env.NODE_ENV)));
-    require('./app_authentication/routes.js')(app, passport);
 
     if (process.env.NODE_ENV === 'development') {app.use(errorhandler()) }
 
+    //passport strategies
+    var loginStrategy = new localStrategy({usernameField: 'name'}, function(name, password, done){
+            AllSchemas.Users.findOne({name: name},function(err, user){
+                if(err) return  done('user not found');
+                if(!user) return done('wrong user name / password');
+
+                user.comparePasswords(password, function(err, isMatch){
+                    if(err) return  done(null, false, {message:'wrong input'});
+                    if(!isMatch) return  done(null, false, {message:'wrong user name / password'});
+                    return done(null,user);
+
+                });
+            });
+        });
+    var registerStrategy = new localStrategy({usernameField: 'name'},function(name, password, done){
+        AllSchemas.Users.findOne({name: name},function(err, user){
+            if(err) return  done('user not found');
+            if(user) return done('email already exists');
+
+            var newUser = new AllSchemas.Users({
+                name: name,
+                password: password
+            });
+            newUser.save(function(err){
+                if (err) throw err;
+                done(null,newUser);
+            });
+        });
+
+    });
+
+    passport.use('local-register', registerStrategy);
+    passport.use('local-login', loginStrategy);
+
     //API'S
-    app.post('/registerUser',routes.createNewUsers);
-    app.post('/loginUser',routes.loginUser);
+    app.post('/registerUser',passport.authenticate('local-register'), routes.createNewUsers);
+    app.post('/loginUser', passport.authenticate('local-login'), routes.loginUser);
     app.post('/newDID', routes.createNewDIDNumber);
     app.get('/getDIDNumber/:country', routes.getDIDNumber);
     app.post('/freeDIDNumber',routes.freeDIDNumber);
@@ -63,5 +100,6 @@ module.exports = function() {
 
     return app;
 }
+
 
 

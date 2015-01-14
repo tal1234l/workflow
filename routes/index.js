@@ -1,9 +1,8 @@
 
 var AllSchemas = require('../schemas/schemas');
 var nodemailer = require("nodemailer");
+var validation = require('../validations/validations');
 var jwt        = require('jwt-simple');
-var buffer;
-
 
 module.exports = function (flights) {
 
@@ -11,48 +10,10 @@ module.exports = function (flights) {
 
     //API's
     functions.createNewUsers = function(req,res){
-        req.user = req.body;
-        debugger;
-        if(!req.user.name || !req.user.password)
-            return res.status(401).send({message:'wrong user name / password'});
-
-        AllSchemas.Users.findOne({name: req.user.name},function(err, user){
-            if(err) throw err;
-            if(user)
-                return res.status(400).send({message:'user name already taken'});
-            else{
-                var newUser = new AllSchemas.Users({
-                    name: req.user.name,
-                    password: req.user.password
-                });
-                createAndSendToken(newUser,res);
-                newUser.save(function(err){
-                    if (err) throw err;
-                });
-            }
-
-        });
+       createAndSendToken(req.user,res);
     };
     functions.loginUser = function(req, res){
-        req.user = req.body;
-        /*validation.validatLogin(req.user.name,req.user.password);*/
-        if(!req.user.name || !req.user.password)
-            return res.status(401).send({message:'wrong user name / password'});
-
-        AllSchemas.Users.findOne({name: req.user.name},function(err, user){
-            if(err)
-                throw Error({message:'no user'});
-            if(!user)
-                return res.status(401).send({message:'wrong user name / password'});
-
-            user.comparePasswords(req.user.password, function(err, isMatch){
-                if (err) throw Error({message:'password is not correct'});
-                if(!isMatch)
-                    return res.status(401).send({message:'wrong user name / password'});
-                createAndSendToken(user,res);
-
-            });
-        });
+        createAndSendToken(req.user,res);
     };
     functions.createNewDIDNumber = function(req, res){
         var DID = req.param('DID');
@@ -143,25 +104,14 @@ module.exports = function (flights) {
         var identities = [
             'tal','gil','ron','jon1'
         ];
-        var token = req.headers.authorization.split(' ')[1];
-        var payload = jwt.decode(token,"shh...");
-        if(!payload.sub)
-        {
-            res.status(401).send({
-                message: 'Authorization failed'
-            });
-        }
-
-        if(!req.headers.authorization){
-            return res.status(401).json({status: 'you are not authorized'});;
-        }
+        validateJWT(req,res);
         res.json(identities);
     };
 
     return functions;
 
 };
-
+//Helper functions
 function createAndSendToken(user, res){
     var payload = {
         sub: user.id
@@ -173,10 +123,15 @@ function createAndSendToken(user, res){
         token: token
     });
 };
-/*var validation = {
-    validatLogin : function(name, password, res){
-        if(!name || !password)
-            return res.status(401).send({message:'wrong user name / password'});
-    }
-};*/
+function validateJWT(req,res){
+    var token = req.headers.authorization.split(' ')[1];
+    var payload = jwt.decode(token,"shh...");
+    if(!payload.sub)
+        return res.status(401).send({message: 'Authorization failed'});
+
+    if(!req.headers.authorization)
+        return res.status(401).json({status: 'you are not authorized'});;
+
+};
+
 
