@@ -27,6 +27,9 @@
     <script src="lib/angular/angular-animate.min.js"></script>
     <script src="lib/angular/angular-ui-router.min.js"></script>
 
+    <!-- Chart libs-->
+    <script src="lib/chart/chart.js"></script>
+
     <!-- build:js -->
 
         <!--html templates-->
@@ -51,13 +54,13 @@
             <nav class="navbar navbar-default">
                 <div class="container">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="/">Seed web application</a>
+                        <a class="navbar-brand" href="/">Azure RealTime Temperate analysis </a>
                     </div>
 
                     <ul class="nav navbar-nav navbar-right">
                         <li ui-sref-active ="active"><a ui-sref="home"><i class="fa fa-home"></i> Home</a></li>
                         <li ui-sref-active ="active"><a ui-sref="about"><i class="fa fa-shield"></i> About</a></li>
-                        <li ui-sref-active ="active"><a ui-sref="contact"><i class="fa fa-comment"></i> Contact</a></li>
+                        <li ui-sref-active ="active"><a ui-sref="temperature"><i class="fa fa-bar-chart"></i> temperature</a></li>
                         <li ng-if="isAuthenticated" ui-sref-active ="active"><a ui-sref="identities"><i class="fa fa-group"></i> Identities</a></li>
                         <li ng-if="!isAuthenticated" ui-sref-active ="active" class="login"><a ui-sref="login"><i class="fa fa-sign-in "></i> Login</a></li>
                         <li ng-if="isAuthenticated" ui-sref-active ="active" class="logout"><a ng-click="logout()"><i class="fa fa-sign-out"></i> Logout</a></li>

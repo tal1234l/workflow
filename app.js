@@ -88,6 +88,9 @@ module.exports = function() {
     //API'S
     app.post('/registerUser',passport.authenticate('local-register'), routes.createNewUsers);
     app.post('/loginUser', passport.authenticate('local-login'), routes.loginUser);
+    app.get('/get-temp', routes.gettemp);
+    app.get('/get-current-temp', routes.getcurrenttemp);
+
     app.post('/newDID', routes.createNewDIDNumber);
     app.get('/getDIDNumber/:country', routes.getDIDNumber);
     app.post('/freeDIDNumber',routes.freeDIDNumber);

@@ -21,10 +21,10 @@ mainApp.config(['$locationProvider','$urlRouterProvider','$stateProvider','$http
         })
 
         // route for the contact page
-        .state('contact', {
-            url:'/contact',
-            templateUrl : '/pages/contact.html',
-            controller: 'contactController'
+        .state('temperature', {
+            url:'/temperature',
+            templateUrl : '/pages/temperature.html',
+            controller: 'temperatureController'
         })
         // route for the identities page
         .state('identities', {
