@@ -10,21 +10,9 @@ mainApp.controller('aboutController',['$scope', function($scope) {
     $scope.message = 'Look! I am an about page.';
     $scope.pageClass = 'page-about';
 }]);
-mainApp.controller('temperatureController',['$scope','dbservice','API_URL','$http', function($scope, dbservice, API_URL,$http) {
-    // Get the context of the canvas element we want to select
-    dbservice.gettempdata();
-
+mainApp.controller('contactController',['$scope', function($scope) {
+    $scope.message = 'Contact us! JK. This is just a demo.';
     $scope.pageClass = 'page-contact';
-    $scope.getTempData = function(){
-        dbservice.gettempdata();
-    }
-    setInterval(function () {
-        $http.get(API_URL + '/get-current-temp')
-            .success(function(res){
-                $scope.currTemp = res;
-            })
-    }, 3000);
-
 }]);
 mainApp.controller('loginController',['$rootScope','$scope','auth', function($rootScope, $scope,auth) {
     $scope.submit = function(){
@@ -40,8 +28,8 @@ mainApp.controller('loginController',['$rootScope','$scope','auth', function($ro
 }]);
 mainApp.controller('registerController',['$rootScope','$scope','auth', function($rootScope, $scope, auth) {
     $scope.submit = function(){
-       auth.register($scope.email,$scope.password)
-           .success(function(res){
+        auth.register($scope.email,$scope.password)
+            .success(function(res){
                 toastr.success('Account ' +res.user.name+' , successfully created');
                 $rootScope.isAuthenticated = true;
             })
