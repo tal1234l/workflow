@@ -22,7 +22,7 @@ module.exports = function (flights) {
                         console.log(err);
                         res.status(500).json({status: 'failure'});
                     } else {
-                        res.status(200).json({status: 'success'});
+                        res.status(200).json({req: req});
                     }
                 });
     };
