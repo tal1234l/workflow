@@ -19,7 +19,7 @@ var Users = new Schema({
 });
 
 //Emails
-var Email = new Email({
+var Email = new Schema({
     data:       {}
 });
 
