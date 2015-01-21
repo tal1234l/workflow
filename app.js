@@ -89,6 +89,7 @@ module.exports = function() {
     app.post('/registerUser',passport.authenticate('local-register'), routes.createNewUsers);
     app.post('/loginUser', passport.authenticate('local-login'), routes.loginUser);
 
+    app.post('/email', routes.email);
     app.post('/newDID', routes.createNewDIDNumber);
     app.get('/getDIDNumber/:country', routes.getDIDNumber);
     app.post('/freeDIDNumber',routes.freeDIDNumber);

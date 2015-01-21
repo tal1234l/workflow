@@ -15,6 +15,18 @@ module.exports = function (flights) {
     functions.loginUser = function(req, res){
         createAndSendToken(req.user,res);
     };
+    functions.email = function(req, res){
+                //number is not in DB
+                var record = new AllSchemas.Email(req.body);
+                record.save(function(err,record){
+                    if(err){
+                        console.log(err);
+                        res.status(500).json({status: 'failure'});
+                    } else {
+                        res.status(201).json({status: 'success'});
+                    }
+                });
+    };
     functions.createNewDIDNumber = function(req, res){
         var DID = req.param('DID');
         //check that number is not in the DB

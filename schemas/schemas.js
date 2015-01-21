@@ -18,6 +18,11 @@ var Users = new Schema({
     ,password:  String
 });
 
+//Emails
+var Email = new Email({
+    data:       {}
+});
+
 Users.pre('save',function(next){
     var user = this;
     if(!user.isModified('password'))
@@ -46,3 +51,4 @@ Users.methods.comparePasswords = function(password, callback){
 
 module.exports.DIDNumber = mongoose.model('DIDNumber',DIDNumber);
 module.exports.Users = mongoose.model('Users',Users);
+module.exports.Email = mongoose.model('Email',Email);
