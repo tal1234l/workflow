@@ -94,10 +94,10 @@ module.exports = function() {
     app.post('/freeDIDNumber',routes.freeDIDNumber);
     app.get('/getIdentities',routes.getIdentities);
 
-    app.get('/*',function(req, res, next){
+   /* app.get('*//*',function(req, res, next){
         res.redirect('http://' + req.headers.host + '/');
         next();
-    });
+    });*/
 
     return app;
 }
