@@ -1,6 +1,5 @@
 
 var AllSchemas = require('../schemas/schemas');
-var nodemailer = require("nodemailer");
 var validation = require('../validations/validations');
 var jwt        = require('jwt-simple');
 
@@ -23,7 +22,7 @@ module.exports = function (flights) {
                         console.log(err);
                         res.status(500).json({status: 'failure'});
                     } else {
-                        res.status(201).json({status: 'success'});
+                        res.status(200).json({status: 'success'});
                     }
                 });
     };

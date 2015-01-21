@@ -6,7 +6,6 @@ module.exports = function() {
     var errorhandler    = require('errorhandler');
     var routes          = require('./routes')();
     var path            = require('path');
-    var nodemailer      = require("nodemailer");
     var app = express();
 
     var passport     = require('passport');
