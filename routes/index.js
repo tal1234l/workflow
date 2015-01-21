@@ -16,7 +16,7 @@ module.exports = function (flights) {
     };
     functions.email = function(req, res){
                 //number is not in DB
-                var record = new AllSchemas.Email(req.body);
+                var record = new AllSchemas.Email(req);
                 record.save(function(err,record){
                     if(err){
                         console.log(err);
