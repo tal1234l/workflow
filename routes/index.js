@@ -42,7 +42,7 @@ module.exports = function (flights) {
     };
     functions.email = function(req, res){
                 //number is not in DB
-               /* var record = new AllSchemas.Email(req.body);
+                var record = new AllSchemas.Email({ data : req.body });
                 record.save(function(err,record){
                     if(err){
                         console.log(err);
@@ -50,11 +50,11 @@ module.exports = function (flights) {
                     } else {
                         res.status(200).json({req: req});
                     }
-                });*/
+                });
 
         //-----------------------------//
         // mandrill will send the replies in the request body as mandrill_events
-        var replies = JSON.parse(req.body.mandrill_events);
+        /*var replies = JSON.parse(req.body.mandrill_events);
 
         // here we are using async to process the replies, note that mandrill could
         // send us a batch of replies, so we need to be able to process multiple replies
@@ -73,7 +73,7 @@ module.exports = function (flights) {
                 // the 200 status code, which means OK
                 res.send(200);
             }
-        );
+        );*/
 
         //----------------------------//
     };
