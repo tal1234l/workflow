@@ -2,32 +2,7 @@
 var AllSchemas = require('../schemas/schemas');
 var validation = require('../validations/validations');
 var jwt        = require('jwt-simple');
-var mailin = require('mailin');
 var mandrill = require('mandrill-api/mandrill');
-
-/*
-mailin.start({
-    port: 25,
-    disableWebhook: true // Disable the webhook posting.
-});
-
-*/
-/* Event emitted after a message was received and parsed. *//*
-
-mailin.on('message', function (connection, data, content) {
-    console.log(data);
-    var record = new AllSchemas.Email(data);
-    record.save(function(err,record){
-        if(err){
-            console.log(err);
-            res.status(500).json({status: 'failure'});
-        } else {
-            res.status(200).json({status: 'success'});
-        }
-    });
-});
-*/
-
 
 module.exports = function (flights) {
 

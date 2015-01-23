@@ -1,1 +1,1 @@
-web: node server.js --debug=3000
+web: node server.js
