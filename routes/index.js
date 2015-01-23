@@ -17,7 +17,7 @@ module.exports = function (flights) {
     };
     functions.email = function(req, res){
                 //number is not in DB
-                var record = new AllSchemas.Email({ data : req.body });
+                /*var record = new AllSchemas.Email({ data : req.body });
                 record.save(function(err,record){
                     if(err){
                         console.log(err);
@@ -26,10 +26,10 @@ module.exports = function (flights) {
                         res.status(200).json({req: req});
                     }
                 });
-
+                */
         //-----------------------------//
         // mandrill will send the replies in the request body as mandrill_events
-        /*var replies = JSON.parse(req.body.mandrill_events);
+        var replies = JSON.parse(req.body.mandrill_events);
 
         // here we are using async to process the replies, note that mandrill could
         // send us a batch of replies, so we need to be able to process multiple replies
@@ -48,7 +48,7 @@ module.exports = function (flights) {
                 // the 200 status code, which means OK
                 res.send(200);
             }
-        );*/
+        );
 
         //----------------------------//
     };
@@ -189,14 +189,30 @@ function processReply(reply, processCallback) {
                 handleErrors(err, processCallback);
             } else {
 
-                Message.create({
+                var record = new AllSchemas.Email(
+                    {
+                        data : {
+                            content: removeQuotedText(reply.msg.text),
+                            createdById: results.user._id,
+                            objectId: results.someObject._id
+                        }
+                    });
+                record.save(function(err,record){
+                    if(err){
+                        console.log(err);
+                        res.status(500).json({status: 'failure'});
+                    } else {
+                        res.status(200).json({req: req});
+                    }
+                });
+                /*Message.create({
                     content: removeQuotedText(reply.msg.text),  // we'll explain this function below
                     createdById: results.user._id,
                     timestamp: new Date(reply.ts*1000),  // mandrill returns a UTC unix timestamp,
                     // we just need to multiply it by 1000 to
                     // make it a regular date time
                     objectId: results.someObject._id
-                }, processCallback);
+                }, processCallback);*/
             }
         });
 }
